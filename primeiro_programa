@@ -1,0 +1,45 @@
+banco_de_dados = []
+
+while True:
+    nome = str(input('Digite seu nome, por favor: '))
+    sexo = str(input('Digite seu sexo (M/F): ')).lower()
+    if sexo == 'f':
+        print(f'Seja bem-vinda, Sra. {nome}')
+    else:
+        print(f'Seja bem-vindo, Sr. {nome}')
+
+    opcao = int(input('Qual sua opção?\n1- Cadastrar novo usuário\n2- Visualizar usuários\n3- Deletar usuário\n'))
+
+    if opcao == 1:
+        quantos = int(input('Quantos usuários deseja cadastrar? '))
+        for i in range(quantos):
+            novo_usuario = {}
+            novo_usuario['nome'] = str(input('Digite o nome: '))
+            novo_usuario['idade'] = int(input('Digite a idade: '))
+            if novo_usuario['idade'] < 18:
+                print('Idade não permitida.')
+                break
+            else:
+                novo_usuario['banco'] = str(input('Digite o banco que será utilizado: '))
+                banco_de_dados.append(novo_usuario)
+                continuar = str(input('Deseja continuar (S/N)? ')).lower()
+                if continuar == 'n':
+                    break
+
+    if opcao == 2:
+        print(banco_de_dados)
+        continuar = str(input('Deseja continuar (S/N)? ')).lower()
+        if continuar == 'n':
+            break
+
+    if opcao == 3:
+        nome_usuario = str(input('Digite o nome do usuário que deseja deletar: '))
+        for usuario in banco_de_dados:
+            if usuario['nome'] == nome_usuario:
+                banco_de_dados.remove(usuario)
+                print(f'Usuário "{nome_usuario}" deletado com sucesso.')
+                break
+        else:
+            print(f'Usuário "{nome_usuario}" não encontrado.')
+
+print('Fim do cadastro.')
